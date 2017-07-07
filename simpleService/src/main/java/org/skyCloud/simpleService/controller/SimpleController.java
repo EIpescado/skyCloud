@@ -3,8 +3,10 @@ package org.skyCloud.simpleService.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,6 +24,9 @@ public class SimpleController {
     @Autowired
     private DiscoveryClient client;
 
+    @Value("${config.test.from}")
+    private String from;
+
     @RequestMapping(value = "/add" ,method = RequestMethod.GET)
     public Integer add(@RequestParam Integer a, @RequestParam Integer b) {
         ServiceInstance instance = client.getLocalServiceInstance();
@@ -30,4 +35,8 @@ public class SimpleController {
         return r;
     }
 
+    @GetMapping(value = "/testConfig")
+    public String testConfig() {
+        return from;
+    }
 }

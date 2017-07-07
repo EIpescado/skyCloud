@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * Created by yq on 2017/07/06 15:57.
- * 服务调用回调工厂
+ * 服务调用回调工厂 Hystrix的融断机制来避免在微服务架构中个别服务出现异常时引起的故障蔓延
  */
 @Component
 public class SimpleClientFallbackFactory implements FallbackFactory<SimpleClient> {
