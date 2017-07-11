@@ -41,7 +41,7 @@
 			<artifactId>spring-cloud-starter-eureka</artifactId>
 		</dependency>
 
-		<!---已引入Hystrix-->
+		<!---已引入Hystrix 服务回调-->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-feign</artifactId>
