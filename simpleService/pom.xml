@@ -47,6 +47,12 @@
 			<artifactId>spring-cloud-starter-config</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>org.skyCloud</groupId>
+			<artifactId>common</artifactId>
+			<version>1.0</version>
+		</dependency>
+
 	</dependencies>
 
 	<dependencyManagement>

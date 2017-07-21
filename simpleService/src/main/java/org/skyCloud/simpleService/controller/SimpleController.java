@@ -1,5 +1,6 @@
 package org.skyCloud.simpleService.controller;
 
+import org.skyCloud.common.utils.QueryExpressInformationUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,5 +39,9 @@ public class SimpleController {
     @GetMapping(value = "/testConfig")
     public String testConfig() {
         return from;
+    }
+
+    public static void main(String[] args) throws Exception {
+        QueryExpressInformationUtils.obtainExpressDetails("885049988808007214");
     }
 }

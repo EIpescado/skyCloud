@@ -1,0 +1,1 @@
+mvn install:install-file -Dfile=D:\MyJavaProject\skyCloud\common\target\common-1.0-SNAPSHOT-jar-with-dependencies.jar -DgroupId=org.skyCloud -DartifactId=common -Dversion=1.0 -Dpackaging=jar
