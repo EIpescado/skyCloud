@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--TRACE < DEBUG < INFO < WARN < ERROR -->
+<configuration debug="true">
+
+    <!-- DEBUG -->
+    <appender name="DEBUG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 按天回滚 daily -->
+            <fileNamePattern>${user.dir}/logs/simpleService/debug-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!-- 日志最大的历史 60天 -->
+            <maxHistory>60</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n</pattern>
+        </encoder>
+    </appender> 
+      
+    <!-- 控制台 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <!-- 出错日志 appender  -->
+    <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 按天回滚 daily -->
+            <fileNamePattern>${user.dir}/logs/simpleService/error-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!-- 日志最大的历史 60天 -->
+            <maxHistory>60</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <!-- 访问日志 appender  -->
+    <appender name="ACCESS" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 按天回滚 daily -->
+            <fileNamePattern>${user.dir}/logs/simpleService/access-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!-- 日志最大的历史 60天 -->
+            <maxHistory>60</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n</pattern>
+        </encoder>
+    </appender>
+    
+    <logger name="java.sql.Connection" level="DEBUG"/>
+    
+    <logger name="java.sql.Statement" level="DEBUG"/>
+    
+    <logger name="java.sql.PreparedStatement" level="DEBUG"/>
+    
+    <logger name="org.springframework" level="ERROR" additivity="false">
+            <appender-ref ref="STDOUT" />
+            <appender-ref ref="ERROR" />
+    </logger>
+    
+    <logger name="org.skyCloud" level="debug" additivity="false">
+            <appender-ref ref="STDOUT" />
+            <appender-ref ref="DEBUG" />
+            <appender-ref ref="ERROR" />
+    </logger>  
+    
+    <!-- 日志输出级别 -->
+    <root level="DEBUG"/>
+     
+</configuration>

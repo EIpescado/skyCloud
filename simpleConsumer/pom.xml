@@ -41,7 +41,8 @@
 			<artifactId>spring-cloud-starter-eureka</artifactId>
 		</dependency>
 
-		<!---已引入Hystrix 服务回调-->
+		<!---已引入 Hystrix具备了服务降级、服务熔断、线程隔离、请求缓存、请求合并以及服务监控等强大功能
+		基于Netflix Feign实现的声明式服务调用客户端,整合了Ribbon和Eureka来提供均衡负载的HTTP客户端实现-->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-feign</artifactId>
