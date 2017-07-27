@@ -5,7 +5,7 @@
     <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
 
     <!--服务名称-->
-    <property name="springAppName" value="simpleService"/>
+    <property name="springAppName" value="simpleConsumer"/>
 
     <!-- Example for logging into the build folder of your project -->
     <property name="LOG_FILE" value="${user.dir}/logs/${springAppName}"/>
