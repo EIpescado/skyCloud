@@ -1,6 +1,7 @@
 package org.skyCloud.common.utils;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
 import org.skyCloud.common.constants.ExceptionConsts;
 import org.skyCloud.common.dataWrapper.BackResult;
 import org.skyCloud.common.exception.SkyException;
@@ -53,8 +54,7 @@ public class QueryExpressInformationUtils {
             map.put("text",expressNo);
 //            String returnStr = HttpUtils.sendPost(QUERY_TYPE_URL,map,false);
             String returnStr = HttpClientUtils.sendPost(QUERY_TYPE_URL,map);
-            ObjectMapper mapper = new ObjectMapper();
-            Map dataMap =  mapper.readValue(returnStr,Map.class);
+            Map<String,Object> dataMap =  JSON.parseObject(returnStr,new TypeReference<Map<String, Object>>(){});
             List<Map> list = (List<Map>) dataMap.get("auto");
             if(list != null && list.size() > 0){
                 String type = (String) list.get(0).get("comCode");
@@ -83,8 +83,7 @@ public class QueryExpressInformationUtils {
         String returnStr = HttpUtils.sendGet(QUERY_DETAILS_URL,map,false);
 
         //解析json
-        ObjectMapper mapper = new ObjectMapper();
-        Map dataMap =  mapper.readValue(returnStr,Map.class);
+        Map<String,Object> dataMap =  JSON.parseObject(returnStr,new TypeReference<Map<String, Object>>(){});
         String status = (String) dataMap.get("status");//查询状态
         logger.info("查询状态 :{}",status);
         if(status.equals("200")){//查询成功
