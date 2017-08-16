@@ -27,6 +27,8 @@ import java.util.List;
 public class TokenFilter extends ZuulFilter{
 
 
+//    private final String tokenSecret="UnRAbmV3dG9rZW4xMjM=";
+
     private final PathMatcher pathMatcher = new AntPathMatcher();
 
     private static final Logger logger = LoggerFactory.getLogger(TokenFilter.class);
@@ -73,7 +75,7 @@ public class TokenFilter extends ZuulFilter{
         String token = req.getHeader(RequestConstant.TOKEN);
         logger.debug("请求头中的token:" + token);
 
-        if ( null != token && "".equals(token)){
+        if ( null != token && !"".equals(token)){
             //检查token是否有效
             boolean bo = TokenUtil.isValid(token,tokenSecret);
             //检查token是否已经被弃用(session redis中能查到代表已弃用)

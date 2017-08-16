@@ -28,9 +28,6 @@ public class Menu extends BaseModel {
     @Column(name = "MENU_CODE", nullable = false, unique = true,length = 40)
     private String code ;
 
-    //菜单级别
-    private Integer level = 0 ;
-
     //菜单url
     private String url ;
 
@@ -65,14 +62,6 @@ public class Menu extends BaseModel {
 
     public void setCode(String code) {
         this.code = code;
-    }
-
-    public Integer getLevel() {
-        return level;
-    }
-
-    public void setLevel(Integer level) {
-        this.level = level;
     }
 
     public String getUrl() {
@@ -137,7 +126,6 @@ public class Menu extends BaseModel {
     @Override
     public int hashCode() {
         int result = getCode().hashCode();
-        result = 31 * result + getLevel().hashCode();
         result = 31 * result + getUrl().hashCode();
         return result;
     }

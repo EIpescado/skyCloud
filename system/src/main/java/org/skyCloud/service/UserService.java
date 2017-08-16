@@ -46,7 +46,7 @@ public class UserService {
     /**根据邮箱密码获取用户*/
     public User findByEmailAndPassword(String email,String password){
         //sh1 加密转16进制大写
-        return userRepository.findByEmailAndPassword(email,CodeUtils.sha1Hex(password));
+        return userRepository.findByEmailAndPassword(email,password);
     }
 
     /**

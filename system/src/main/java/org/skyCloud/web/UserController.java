@@ -67,7 +67,7 @@ public class UserController extends BaseController{
     })
     @PostMapping(value = "/login")
     public BackResult login(@RequestParam(name = "email") String email,@RequestParam(name = "password") String password){
-        User user =  userService.findByEmailAndPassword(email,password);
+        User user =  userService.findByEmailAndPassword(email,userService.encryptPassword(password));
         String msg ;
         if(user != null){
             if(!user.getEnabled()){
@@ -139,7 +139,7 @@ public class UserController extends BaseController{
     })
     @PostMapping("/changePassword")
     public BackResult changePassword(@RequestParam(name = "email") String email, @RequestParam(name = "oldPassword") String oldPassword, @RequestParam(name = "newPassword") String newPassword){
-        User user =  userService.findByEmailAndPassword(email,oldPassword);
+        User user =  userService.findByEmailAndPassword(email,userService.encryptPassword(oldPassword));
         if(user != null){
             String password = userService.encryptPassword(newPassword);
             user.setPassword(password);
