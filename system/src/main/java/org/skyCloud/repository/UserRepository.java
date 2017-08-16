@@ -1,6 +1,6 @@
 package org.skyCloud.repository;
 
-import org.skyCloud.base.BaseRepository;
+import org.skyCloud.common.base.BaseRepository;
 import org.skyCloud.entity.User;
 import org.springframework.stereotype.Repository;
 

@@ -9,4 +9,4 @@ spring:
         #配置文件名称前缀 启用中心配置
         name: common-config
         profile: ${config.profile:dev}
-        uri: http://localhost:1000
+        uri: http://localhost:2001

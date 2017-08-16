@@ -1,7 +1,7 @@
 package org.skyCloud.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.skyCloud.base.BaseModel;
+import org.skyCloud.common.base.BaseModel;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;

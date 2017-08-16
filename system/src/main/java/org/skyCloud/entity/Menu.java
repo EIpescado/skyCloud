@@ -2,7 +2,7 @@ package org.skyCloud.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.skyCloud.base.BaseModel;
+import org.skyCloud.common.base.BaseModel;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -127,12 +127,10 @@ public class Menu extends BaseModel {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Menu menu = (Menu) o;
-
-        if (!getCode().equals(menu.getCode())) return false;
-        if (getLevel().compareTo(menu.getLevel()) != 0) return false;
-        return getUrl().equals(menu.getUrl());
+        if(getId() == null ||  "".equals(getId())) return false;
+        if(menu.getId() == null ||  "".equals(menu.getId())) return false;
+        return getId().equals(menu.getId());
 
     }
 

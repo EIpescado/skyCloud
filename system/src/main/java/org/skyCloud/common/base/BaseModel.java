@@ -1,4 +1,4 @@
-package org.skyCloud.base;
+package org.skyCloud.common.base;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;

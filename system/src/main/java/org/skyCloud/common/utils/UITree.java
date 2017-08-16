@@ -1,7 +1,6 @@
-package org.skyCloud.utils;
+package org.skyCloud.common.utils;
 
 
-import org.skyCloud.common.utils.StringUtils;
 import org.skyCloud.entity.Menu;
 
 import java.util.ArrayList;
@@ -159,21 +158,23 @@ public class UITree {
      * @param menus
      */
     public static List<UITree> buildTree(List<Menu> menus){
-        List<UITree> uiTreeList = new ArrayList<>(menus.size());
-
-        menus.stream().forEach(r -> {
-            //根菜单
-            if(StringUtils.isEmpty(r.getRootMenuId())){
-                UITree tree = new UITree(r.getId(),
-                                        StringUtils.isNotEmpty(r.getRootMenuId()),
-                                        r.getStyle(),
-                                        r.getUrl(),
-                                        r.getName(),
-                                        r.getRootMenuId(),count,r.getEvent());
-                uiTreeList.add(buildTree(tree,menus));
-                count = 0;
-            }
-        });
-        return  uiTreeList;
+        if(CollectionUtils.isNotEmpty(menus)){
+            List<UITree> uiTreeList = new ArrayList<>(menus.size());
+            menus.stream().forEach(r -> {
+                //根菜单
+                if(StringUtils.isEmpty(r.getRootMenuId())){
+                    UITree tree = new UITree(r.getId(),
+                            StringUtils.isNotEmpty(r.getRootMenuId()),
+                            r.getStyle(),
+                            r.getUrl(),
+                            r.getName(),
+                            r.getRootMenuId(),count,r.getEvent());
+                    uiTreeList.add(buildTree(tree,menus));
+                    count = 0;
+                }
+            });
+            return  uiTreeList;
+        }
+       return  null;
     }
 }

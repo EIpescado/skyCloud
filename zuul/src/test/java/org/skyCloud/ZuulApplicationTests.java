@@ -1,4 +1,4 @@
-package org.skyCloud.zuul;
+package org.skyCloud;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
