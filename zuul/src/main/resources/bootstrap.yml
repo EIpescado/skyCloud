@@ -4,5 +4,14 @@ spring:
   cloud:
     config:
         #配置文件名称前缀 启用中心配置 #读取文件前缀
+        #不填写名称默认为spring.application.name值
         profile: ${config.profile:dev}
+        # 脱离git服务端 调用本第缓存 进行快速开发调试
+#         uri:file:${user.home}/common-config-repo
         uri: http://localhost:2001
+        label: master #分支名
+        #优先判断是否获取正常,快速响应失败结果
+        fail-fast: true
+  application:
+      name: zuul
+
