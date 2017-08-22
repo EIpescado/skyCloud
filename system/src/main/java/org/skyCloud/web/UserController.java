@@ -103,7 +103,7 @@ public class UserController extends BaseController{
     @ApiOperation(value = "获取用户菜单",notes = "根据用户请求头token获取用户菜单")
     @GetMapping("/menus")
     public BackResult menus(){
-        String id = TokenUtil.getFieldValue(tokenSecret,"id");//用户id
+        String id = TokenUtil.getFieldValue(tokenSecret,TokenConstant.ID);//用户id
         if(StringUtils.isEmpty(id)){
             return  BackResult.failureBack(messageService.getMessage("user.login.expire"));
         }else {

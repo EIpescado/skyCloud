@@ -21,10 +21,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *业务请求Token检查
+ * 业务请求Token检查
  */
 @Component
-public class TokenFilter extends ZuulFilter{
+public class TokenFilter extends ZuulFilter {
 
 
 //    private final String tokenSecret="UnRAbmV3dG9rZW4xMjM=";
@@ -33,10 +33,11 @@ public class TokenFilter extends ZuulFilter{
 
     private static final Logger logger = LoggerFactory.getLogger(TokenFilter.class);
 
-     //不拦截的请求链接
-    private  static List<String> noInterceptorList=new ArrayList<String>(){
+    //不拦截的请求链接
+    private static List<String> noInterceptorList = new ArrayList<String>() {
         {
             add("/api/system/user/login");
+            add("/api/system/user/register");
         }
     };
 
@@ -44,58 +45,72 @@ public class TokenFilter extends ZuulFilter{
     private static final String FAIL_MSG = "登录已失效";
 
     @Autowired
-    private RedisTemplate<String,String> redisTemplate;
+    private RedisTemplate<String, String> redisTemplate;
 
     @Value("${token.secret}")
     private String tokenSecret;  //token秘钥
 
+    /**
+     * 过滤器类型
+     * pre：可以在请求被路由之前调用
+     * route：在路由请求时候被调用
+     * post：在route和error过滤器之后被调用
+     * error：处理请求时发生错误时被调用
+     */
     @Override
     public String filterType() {
         return "pre";
     }
 
+    /**
+     * 定义路由执行顺序 数值越小优先级越高
+     **/
     @Override
     public int filterOrder() {
-        return 0;
+        return 1;
     }
 
+    /**
+     * 指定过滤器的有效范围
+     */
     @Override
     public boolean shouldFilter() {
         return true;
     }
 
+    /**
+     * 过滤器具体逻辑
+     */
     @Override
     public Object run() {
         RequestContext ctx = RequestContext.getCurrentContext();
-        HttpServletRequest req= ctx.getRequest();
-
-        if(isExclude(req)){
+        HttpServletRequest req = ctx.getRequest();
+        if (isExclude(req)) {
             return null;
         }
         String token = req.getHeader(RequestConstant.TOKEN);
         logger.debug("请求头中的token:" + token);
 
-        if ( null != token && !"".equals(token)){
+        if (null != token && !"".equals(token)) {
             //检查token是否有效
-            boolean bo = TokenUtil.isValid(token,tokenSecret);
+            boolean bo = TokenUtil.isValid(token, tokenSecret);
             //检查token是否已经被弃用(session redis中能查到代表已弃用)
-            String outToken ;
-            try{
-                outToken= redisTemplate.opsForValue().get(token);
-            }catch (Exception e){
-                logger.error("redis异常",e);
+            String outToken;
+            try {
+                outToken = redisTemplate.opsForValue().get(token);
+            } catch (Exception e) {
+                logger.error("redis异常", e);
                 return null;
             }
             logger.debug("redis中取出的token:" + outToken);
-            if (bo && (null == outToken || "".equals(outToken))){
-               return null;
-            }else {
+            if (bo && (null == outToken || "".equals(outToken))) {
+                return null;
+            } else {
                 failLogin(ctx);
             }
-        }else {
+        } else {
             failLogin(ctx);
         }
-
         return null;
     }
 
@@ -104,8 +119,8 @@ public class TokenFilter extends ZuulFilter{
      */
     private boolean isExclude(final HttpServletRequest request) {
         String url = request.getServletPath();
-        for(String pattern : noInterceptorList) {
-            if(pathMatcher.match(pattern, url)) {
+        for (String pattern : noInterceptorList) {
+            if (pathMatcher.match(pattern, url)) {
                 return true;
             }
         }
@@ -115,20 +130,19 @@ public class TokenFilter extends ZuulFilter{
     /**
      * 响应客户端
      */
-    public void failLogin(RequestContext ctx){
-        try{
+    public void failLogin(RequestContext ctx) {
+        try {
             HttpServletResponse response = ctx.getResponse();
             response.setCharacterEncoding("UTF-8");
             response.setContentType("application/json; charset=utf-8");
-            PrintWriter out = response.getWriter();
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("code",FAIL_CODE);
-            jsonObject.put("msg",FAIL_MSG);
-            out.write(jsonObject.toString());
-            ctx.setSendZuulResponse(false);
+            jsonObject.put("code", FAIL_CODE);
+            jsonObject.put("msg", FAIL_MSG);
+            ctx.setSendZuulResponse(false);//过滤该请求 不对其进行路由
             ctx.setResponseStatusCode(HttpServletResponse.SC_UNAUTHORIZED);
+            ctx.setResponseBody(jsonObject.toJSONString());
             ctx.setResponse(response);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException(e.getMessage());
         }
