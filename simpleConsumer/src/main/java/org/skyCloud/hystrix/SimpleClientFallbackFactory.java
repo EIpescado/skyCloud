@@ -1,7 +1,7 @@
-package org.skyCloud.simpleConsumer.hystrix;
+package org.skyCloud.hystrix;
 
 import feign.hystrix.FallbackFactory;
-import org.skyCloud.simpleConsumer.client.SimpleClient;
+import org.skyCloud.client.SimpleClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ public class SimpleClientFallbackFactory implements FallbackFactory<SimpleClient
 
     @Override
     public SimpleClient create(Throwable throwable) {
-        logger.error("服务:{} 不可用,原因: {}",discoveryClient.getLocalServiceInstance().getServiceId(),throwable.getMessage());
-        return (a, b) -> null;
+        logger.error("服务:{} 不可用,原因: {}",discoveryClient.getServices().get(0),throwable.getMessage());
+        return () -> null;
     }
 }

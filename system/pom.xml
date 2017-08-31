@@ -133,6 +133,12 @@
 			<version>${jjwt.version}</version>
 		</dependency>
 
+		<!--消息驱动-->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-stream-rabbit</artifactId>
+		</dependency>
+
 	</dependencies>
 
 	<build>

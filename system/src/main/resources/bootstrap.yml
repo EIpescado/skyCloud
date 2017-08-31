@@ -7,3 +7,5 @@ spring:
         name: common-config
         profile: ${config.profile:dev}
         uri: http://localhost:2001
+  application:
+    name: system
