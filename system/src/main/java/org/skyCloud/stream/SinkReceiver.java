@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.annotation.StreamListener;
+import org.springframework.integration.annotation.ServiceActivator;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.handler.annotation.SendTo;
 
@@ -27,4 +28,13 @@ public class SinkReceiver {
         json.put("addNew","新添加");
         return json;
     }
+
+    //效果同上
+//    @ServiceActivator(inputChannel = SystemSink.SYSTEM_INPUT,outputChannel = SystemSource.SYSTEM_OUTPUT)
+//    public Object receiveFromInput(Object payload){
+//        JSONObject json = JSON.parseObject(payload.toString());
+//        logger.info("接收消息 {},开始加工",json.toJSONString());
+//        json.put("addNew","新添加2");
+//        return json;
+//    }
 }

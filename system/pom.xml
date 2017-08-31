@@ -57,13 +57,6 @@
 			</exclusions>
 		</dependency>
 
-		<!--mysql-->
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>${mysql.version}</version>
-		</dependency>
-
 		<!--服务注册中心-->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
@@ -87,11 +80,10 @@
 			<artifactId>spring-cloud-starter-feign</artifactId>
 		</dependency>
 
-		<!--本地工具类jar-->
+		<!--消息驱动 rabbitMQ-->
 		<dependency>
-			<groupId>org.skyCloud</groupId>
-			<artifactId>common</artifactId>
-			<version>${common.version}</version>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-stream-rabbit</artifactId>
 		</dependency>
 
 		<!--分布式追踪解决方案-->
@@ -102,6 +94,13 @@
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-zipkin</artifactId>
+		</dependency>
+
+		<!--本地工具类jar-->
+		<dependency>
+			<groupId>org.skyCloud</groupId>
+			<artifactId>common</artifactId>
+			<version>${common.version}</version>
 		</dependency>
 
 		<!--swagger2 rest api-->
@@ -133,10 +132,11 @@
 			<version>${jjwt.version}</version>
 		</dependency>
 
-		<!--消息驱动-->
+		<!--mysql-->
 		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-stream-rabbit</artifactId>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql.version}</version>
 		</dependency>
 
 	</dependencies>

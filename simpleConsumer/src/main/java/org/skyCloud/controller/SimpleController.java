@@ -25,7 +25,7 @@ public class SimpleController {
 
     @GetMapping("listMenu")
     public Object listMenu() {
-        logger.info("开始调用 {} 服务",discoveryClient.getLocalServiceInstance().getServiceId());
+        logger.info("开始调用 {} 服务",discoveryClient.getServices().get(0));
        return simpleClient.list();
     }
 

@@ -23,7 +23,6 @@ public class ScheduledTasks {
     @Autowired
     private SimpleSource simpleSource;
 
-    //每0.1s触发一次
     @Scheduled(fixedRate = 30000)
     public void processEvent() {
         logger.info("定时 发送消息..");
