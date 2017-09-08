@@ -14,4 +14,20 @@ spring:
         fail-fast: true
   application:
       name: zuul
+      #多环境默认激活 zuul1
+  profiles:
+    active: zuul1
+
+#多实例配置
+---
+spring:
+  profiles: zuul1
+server:
+  port: 2333
+
+---
+spring:
+  profiles: zuul2
+server:
+  port: 2334
 

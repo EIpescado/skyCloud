@@ -11,6 +11,6 @@ public class ObjectUtils {
     }
 
     public static boolean isNull(Object obj){
-       return obj == null || "".equals(obj) || "null".equals(obj) || "NULL".equals(obj) ;
+       return obj == null || obj.toString().trim().length() == 0 ||"null".equalsIgnoreCase(obj.toString()) ;
     }
 }
