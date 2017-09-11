@@ -1,0 +1,1 @@
+java -Dspring.profiles.active=system2 -Dspring.cloud.stream.instance-index=1 -jar D:\MyJavaProject\skyCloud\system\target\system-0.0.1-SNAPSHOT.jar
