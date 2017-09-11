@@ -9,3 +9,17 @@ spring:
         uri: http://localhost:2001
   application:
     name: simpleConsumer
+  profiles:
+    active: simpleConsumer1
+
+---
+spring:
+  profiles: simpleConsumer1
+server:
+  port: 3333
+
+---
+spring:
+  profiles: simpleConsumer2
+server:
+  port: 3334

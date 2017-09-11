@@ -1,5 +1,6 @@
 package org.skyCloud;
 
+import org.skyCloud.common.dataWrapper.BackResult;
 import org.skyCloud.stream.SimpleSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +28,8 @@ public class ScheduledTasks {
     public void processEvent() {
         logger.info("定时 发送消息..");
         simpleSource.simpleOutput().send(
-                MessageBuilder.withPayload("{\"code\":\"1\",\"msg\":\"成功\",\"data\":[{\"code\":\"\",\"name\":\"全部\",\"tote\":74953,\"documentStatusId\":\"\"}]}")
+//                MessageBuilder.withPayload("{\"code\":\"1\",\"msg\":\"成功\",\"data\":[{\"code\":\"\",\"name\":\"全部\",\"tote\":74953,\"documentStatusId\":\"\"}]}")
+                MessageBuilder.withPayload(new BackResult())
                         .build());
     }
 

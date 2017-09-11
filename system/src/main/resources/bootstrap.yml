@@ -9,3 +9,17 @@ spring:
         uri: http://localhost:2001
   application:
     name: system
+  profiles:
+    active: system1
+
+---
+spring:
+  profiles: system1
+server:
+  port: 2003
+
+---
+spring:
+  profiles: system2
+server:
+  port: 2004
