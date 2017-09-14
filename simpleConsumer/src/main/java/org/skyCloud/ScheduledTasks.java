@@ -24,7 +24,7 @@ public class ScheduledTasks {
     @Autowired
     private SimpleSource simpleSource;
 
-    @Scheduled(fixedRate = 30000)
+//    @Scheduled(fixedRate = 30000)
     public void processEvent() {
         logger.info("定时 发送消息..");
         simpleSource.simpleOutput().send(
