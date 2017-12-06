@@ -87,7 +87,7 @@ public class UserService {
                 //获取单个菜单下的所有按钮菜单
                 menus.addAll(menuRepository.findAllByMenuTypeAndRootMenuIdOrderByCodeAsc(MenuType.ButtonMenu,menuId));
             }else {
-                menus.addAll(menuRepository.findAllByMenuTypeAndRootMenuIdAndRolesInOrderByCodeAsc(MenuType.NavigationMenu,menuId,user.getRoles()));
+                menus.addAll(menuRepository.findAllByMenuTypeAndRootMenuIdAndRolesInOrderByCodeAsc(MenuType.ButtonMenu,menuId,user.getRoles()));
             }
             return new ArrayList<Menu>(){{addAll(menus);}};
         }

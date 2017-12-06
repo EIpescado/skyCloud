@@ -49,6 +49,19 @@ public class StringUtils {
     }
 
     /**
+     * 字符串去左右空格
+     */
+    public static  String null2EmptyWithTrimNew(Object s)
+    {
+
+        if (s == null || "NULL".equalsIgnoreCase(s.toString())) {
+            return "";
+        } else {
+            return s.toString().trim();
+        }
+    }
+
+    /**
      * 字符串是否为空
      */
     public static  boolean isEmpty(String foo) {
@@ -163,7 +176,49 @@ public class StringUtils {
         }
     }
 
+    /**
+     * 左补全字符
+     * @param w84PaddingStr 需要补全的字符
+     * @param digit 补全后字符的位数
+     * @param paddingStr 补全使用的字符
+     */
+    public static String leftPadding(String w84PaddingStr,int digit,String paddingStr){
+        w84PaddingStr = null2EmptyWithTrim(w84PaddingStr);
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < digit - w84PaddingStr.length(); i++) {
+            sb.append(paddingStr);
+        }
+        sb.append(w84PaddingStr);
+        return sb.toString();
+    }
+
+    /**
+     * 右补全字符
+     * @param w84PaddingStr 需要补全的字符
+     * @param digit 补全后字符的位数
+     * @param paddingStr 补全使用的字符
+     */
+    public static String rightPadding(String w84PaddingStr,int digit,String paddingStr){
+        w84PaddingStr = null2EmptyWithTrim(w84PaddingStr);
+        StringBuffer sb = new StringBuffer();
+        sb.append(w84PaddingStr);
+        for (int i = 0; i < digit - w84PaddingStr.length(); i++) {
+            sb.append(paddingStr);
+        }
+        return sb.toString();
+    }
+
+    /**
+     * 月份补全 2位
+     * @param month 月份
+     */
+    public static String monthPadding(int month){
+        return leftPadding(Integer.valueOf(month).toString(),2,"0");
+    }
+
     public static void main(String[] args) {
         System.out.println(removeAllSpecialChar("d@ _|\"qwe?%$#251"));
+        System.out.println(monthPadding(3));
+        System.out.println(monthPadding(12));
     }
 }

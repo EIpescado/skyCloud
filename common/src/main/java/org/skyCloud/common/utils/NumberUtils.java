@@ -196,6 +196,98 @@ public class NumberUtils {
         return sb.toString();
     }
 
+    /**
+     * a 是否大于 b
+     */
+    public static boolean greaterThan(BigDecimal a , BigDecimal b){
+        if(a != null && b != null){
+            return a.compareTo(b) == 1;
+        }else {
+            throw new IllegalArgumentException("参数异常");
+        }
+    }
+
+    /**
+     * a 是否大于 0
+     */
+    public static boolean greaterThenZero(BigDecimal a){
+        return greaterThan(a,BigDecimal.ZERO);
+    }
+
+    /**
+     * a 是否大于等于 b
+     */
+    public static boolean greaterOrEqual(BigDecimal a ,BigDecimal b){
+        if(a != null && b != null){
+            return a.compareTo(b) >= 0;
+        }else {
+            throw new IllegalArgumentException("参数异常");
+        }
+    }
+
+    /**
+     * a 是否大于等于 0
+     */
+    public static boolean greaterOrEqualZero(BigDecimal a){
+        return greaterOrEqual(a,BigDecimal.ZERO);
+    }
+
+
+    /**
+     * a 是否小于 b
+     */
+    public static boolean lessThen(BigDecimal a ,BigDecimal b){
+        if(a != null && b != null){
+            return a.compareTo(b) == -1;
+        }else {
+            throw new IllegalArgumentException("参数异常");
+        }
+    }
+
+    /**
+     * a 是否小于 0
+     */
+    public static boolean lessThenZero(BigDecimal a){
+        return lessThen(a,BigDecimal.ZERO);
+    }
+
+    /**
+     * a 是否小于等于 b
+     */
+    public static boolean lessOrEqual(BigDecimal a ,BigDecimal b){
+        if(a != null && b != null){
+            return a.compareTo(b) <= 0;
+        }else {
+            throw new IllegalArgumentException("参数异常");
+        }
+    }
+
+    /**
+     * a 是否小于等于 0
+     */
+    public static boolean lessOrEqualZero(BigDecimal a){
+        return lessOrEqual(a,BigDecimal.ZERO);
+    }
+
+    /**
+     * a 是否等于 b
+     */
+    public static boolean equalTo(BigDecimal a ,BigDecimal b){
+        if(a != null && b != null){
+            return a.compareTo(b) == 0;
+        }else {
+            throw new IllegalArgumentException("参数异常");
+        }
+    }
+
+    /**
+     * a 是否等于0
+     */
+    public static boolean equalZero(BigDecimal a){
+        return equalTo(a,BigDecimal.ZERO);
+    }
+
+
     public static void main(String[] args) {
         System.out.println(number2Chinese(new BigDecimal(0.00)));
         System.out.println(number2Chinese(new BigDecimal(-1.212)));
