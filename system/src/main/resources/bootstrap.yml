@@ -6,7 +6,7 @@ spring:
         #配置文件名称前缀 启用中心配置 #读取文件前缀
         name: common-config
         profile: ${config.profile:dev}
-        uri: http://localhost:2001
+        uri: http://localhost:2004
   application:
     name: system
   profiles:
