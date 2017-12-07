@@ -11,12 +11,12 @@ import org.springframework.messaging.Message;
  * 消息消费者
  */
 @EnableBinding({SimpleSource.class,SimpleSink.class})
-public class SimpleReceiver {
+public class RabbitReceiver {
 
-    private final Logger logger = LoggerFactory.getLogger(SimpleReceiver.class);
+    private final Logger logger = LoggerFactory.getLogger(RabbitReceiver.class);
 
-    //对SIMPLE_INPUT监听
-    @StreamListener(SimpleSink.SIMPLE_INPUT)
+    //对SIMPLECONSUMER_SYSTEM_INPUT监听
+    @StreamListener(SimpleSink.SIMPLECONSUMER_SYSTEM_INPUT)
     public void receive(Message<Object> message){
         logger.info("SimpleReceiver 测试接收消息 {}",message.getPayload().toString());
     }

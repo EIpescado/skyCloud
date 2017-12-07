@@ -9,11 +9,9 @@ import org.springframework.messaging.MessageChannel;
  */
 public interface SystemSource  {
 
-    String SYSTEM_OUTPUT = "systemOutput";
+    String SYSTEM_SIMPLECONSUMER_OUTPUT = "system_simpleConsumer_output";
 
-    /**
-     * 不指定名字 默认使用方法名
-     */
-    @Output(SYSTEM_OUTPUT)
-    MessageChannel systemOutput();
+    //不指定名字 默认使用方法名
+    @Output(SYSTEM_SIMPLECONSUMER_OUTPUT)
+    MessageChannel system_simpleConsumer_output();
 }

@@ -1,0 +1,19 @@
+#--config的相关配置会先于application.properties，
+#bootstrap.properties的加载也是先于application.properties
+spring:
+  application:
+    name: config-server
+  profiles:
+    active: config-server1
+
+---
+spring:
+  profiles: config-server1
+server:
+  port: 2004
+
+---
+spring:
+  profiles: config-server2
+server:
+  port: 2005
