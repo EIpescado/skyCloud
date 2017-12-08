@@ -16,10 +16,10 @@ spring:
 spring:
   profiles: system1
 server:
-  port: 2003
+  port: 3401
 
 ---
 spring:
   profiles: system2
 server:
-  port: 2004
+  port: 3402

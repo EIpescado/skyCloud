@@ -11,9 +11,9 @@ import org.springframework.messaging.SubscribableChannel;
  */
 public interface SystemSink {
 
-    String SYSTEM_SIMPLECONSUMER_INPUT = "system_simpleconsumer_input";
+    String SYSTEM_SIMPLECONSUMER_INPUT = "system_simpleConsumer_input";
 
     //不指定名字 默认使用方法名
     @Input(SYSTEM_SIMPLECONSUMER_INPUT)
-    SubscribableChannel system_simpleconsumer_input();
+    SubscribableChannel system_simpleConsumer_input();
 }
