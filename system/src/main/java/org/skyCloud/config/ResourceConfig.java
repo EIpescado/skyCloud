@@ -13,6 +13,9 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 import java.util.Locale;
 
+/**
+ * 国际化文件配置
+ */
 @Configuration
 public class ResourceConfig extends WebMvcConfigurerAdapter {
 

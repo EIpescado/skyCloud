@@ -34,6 +34,7 @@
         <poi.version>3.14</poi.version>
         <jsoup.version>1.9.2</jsoup.version>
         <fastjson.version>1.2.33</fastjson.version>
+        <jjwt.version>0.6.0</jjwt.version>
     </properties>
 
     <dependencies>
@@ -160,10 +161,18 @@
             <version>${fastjson.version}</version>
         </dependency>
 
+        <!--数据抓取jsoup-->
         <dependency>
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>
             <version>${jsoup.version}</version>
+        </dependency>
+
+        <!--token-->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>${jjwt.version}</version>
         </dependency>
 
         <!--本地jar-->

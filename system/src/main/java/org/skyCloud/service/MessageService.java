@@ -26,7 +26,7 @@ public class MessageService {
             try {
                 msg = messageSource.getMessage(code, params, LocaleContextHolder.getLocale());
             } catch(Exception e){
-                logger.error("未找到编码" + code + "映射",e);
+                logger.error("编码:{}映射不存在...",code);
                 return code;
             }
         }
@@ -39,7 +39,7 @@ public class MessageService {
             try {
                 msg = messageSource.getMessage(code,null,LocaleContextHolder.getLocale());
             } catch(Exception e){
-                logger.error("未找到编码" + code + "映射",e);
+                logger.error("编码:{}映射不存在...",code);
                 return code;
             }
         }

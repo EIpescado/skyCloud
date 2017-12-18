@@ -2,7 +2,7 @@ package org.skyCloud.repository;
 
 import org.skyCloud.common.base.BaseRepository;
 import org.skyCloud.entity.Menu;
-import org.skyCloud.entity.MenuType;
+import org.skyCloud.entity.MenuTypeEnum;
 import org.skyCloud.entity.Role;
 import org.springframework.stereotype.Repository;
 
@@ -16,13 +16,13 @@ import java.util.List;
 @Repository
 public interface MenuRepository extends BaseRepository<Menu,String> {
 
-    List<Menu> findAllByMenuTypeOrderByCodeAsc(MenuType menuType);
+    List<Menu> findAllByMenuTypeOrderByCodeAsc(MenuTypeEnum menuType);
 
-    List<Menu> findAllByMenuTypeAndRootMenuIdOrderByCodeAsc(MenuType menuType,String rootMenuId);
+    List<Menu> findAllByMenuTypeAndRootMenuIdOrderByCodeAsc(MenuTypeEnum menuType, String rootMenuId);
 
     //根据角色in和菜单类型获取菜单
-    List<Menu> findAllByMenuTypeAndRolesInOrderByCodeAsc(MenuType menuType,Collection<Role> roles);
+    List<Menu> findAllByMenuTypeAndRolesInOrderByCodeAsc(MenuTypeEnum menuType, Collection<Role> roles);
 
     //根据角色in获取菜单属于用户角色的菜单
-    List<Menu> findAllByMenuTypeAndRootMenuIdAndRolesInOrderByCodeAsc(MenuType menuType,String rootMenuId,Collection<Role> roles);
+    List<Menu> findAllByMenuTypeAndRootMenuIdAndRolesInOrderByCodeAsc(MenuTypeEnum menuType, String rootMenuId, Collection<Role> roles);
 }

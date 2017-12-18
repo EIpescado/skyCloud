@@ -1,7 +1,8 @@
 package org.skyCloud.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.skyCloud.entity.Menu;
-import org.skyCloud.entity.MenuType;
+import org.skyCloud.entity.MenuTypeEnum;
 
 import java.util.Date;
 
@@ -19,8 +20,9 @@ public class MenuDto {
 
     private String style ;
 
-    private MenuType menuType;
+    private MenuTypeEnum menuType;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date dateCreated ;
 
     private Boolean enabled ;
@@ -75,11 +77,11 @@ public class MenuDto {
         this.style = style;
     }
 
-    public MenuType getMenuType() {
+    public MenuTypeEnum getMenuType() {
         return menuType;
     }
 
-    public void setMenuType(MenuType menuType) {
+    public void setMenuType(MenuTypeEnum menuType) {
         this.menuType = menuType;
     }
 

@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiOperation;
 import org.skyCloud.common.base.BaseController;
 import org.skyCloud.common.constants.TokenConstant;
 import org.skyCloud.common.dataWrapper.BackResult;
+import org.skyCloud.common.utils.BaseUtils;
 import org.skyCloud.common.utils.StringUtils;
 import org.skyCloud.common.utils.TokenUtil;
 import org.skyCloud.common.utils.UITree;
@@ -103,7 +104,7 @@ public class UserController extends BaseController{
     @ApiOperation(value = "获取用户菜单",notes = "根据用户请求头token获取用户菜单")
     @GetMapping("/menus")
     public BackResult menus(){
-        String id = TokenUtil.getFieldValue(tokenSecret,TokenConstant.ID);//用户id
+        String id = BaseUtils.getFieldValueFromToken(tokenSecret,TokenConstant.ID);//用户id
         if(StringUtils.isEmpty(id)){
             return  BackResult.failureBack(messageService.getMessage("user.login.expire"));
         }else {
@@ -116,7 +117,7 @@ public class UserController extends BaseController{
     @ApiOperation(value = "登出 存入redis 若存在则表示失效")
     @GetMapping("/loginOut")
     public BackResult loginOut(){
-        String token = TokenUtil.getToken();
+        String token = BaseUtils.getToken();
         if(StringUtils.isNotEmpty(token)){
             try{
                 //保存到session redis
@@ -154,7 +155,7 @@ public class UserController extends BaseController{
     @RequestMapping(value="/menu/{id}/buttons",method = RequestMethod.GET)
     @ApiImplicitParam(name = "id", value = "菜单id", required = true, dataType = "String")
     public BackResult getButtonByMenuId(@PathVariable(name = "id")String id){
-        String userId = TokenUtil.getFieldValue(tokenSecret,TokenConstant.ID);//用户id
+        String userId = BaseUtils.getFieldValueFromToken(tokenSecret,TokenConstant.ID);//用户id
         if(StringUtils.isEmpty(userId)){
             return  BackResult.failureBack(messageService.getMessage("user.login.expire"));
         }else {

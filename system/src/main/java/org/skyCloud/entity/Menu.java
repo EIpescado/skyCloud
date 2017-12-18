@@ -42,7 +42,7 @@ public class Menu extends BaseModel {
 
     //菜单类型
     @Enumerated(EnumType.STRING) //枚举映射
-    private MenuType menuType = MenuType.NavigationMenu ;
+    private MenuTypeEnum menuType = MenuTypeEnum.NavigationMenu ;
 
     @ManyToMany(mappedBy = "menus")
     @JsonIgnore
@@ -96,11 +96,11 @@ public class Menu extends BaseModel {
         this.event = event;
     }
 
-    public MenuType getMenuType() {
+    public MenuTypeEnum getMenuType() {
         return menuType;
     }
 
-    public void setMenuType(MenuType menuType) {
+    public void setMenuType(MenuTypeEnum menuType) {
         this.menuType = menuType;
     }
 

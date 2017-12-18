@@ -2,7 +2,7 @@ package org.skyCloud.service;
 
 import org.skyCloud.common.utils.CodeUtils;
 import org.skyCloud.entity.Menu;
-import org.skyCloud.entity.MenuType;
+import org.skyCloud.entity.MenuTypeEnum;
 import org.skyCloud.entity.Role;
 import org.skyCloud.entity.User;
 import org.skyCloud.exception.UserException;
@@ -64,9 +64,9 @@ public class UserService {
                 }
             }
             if (isAdmin) {
-                menus.addAll(menuRepository.findAllByMenuTypeOrderByCodeAsc(MenuType.NavigationMenu));//所有导航菜单
+                menus.addAll(menuRepository.findAllByMenuTypeOrderByCodeAsc(MenuTypeEnum.NavigationMenu));//所有导航菜单
             }else {
-                menus.addAll(menuRepository.findAllByMenuTypeAndRolesInOrderByCodeAsc(MenuType.NavigationMenu,user.getRoles()));
+                menus.addAll(menuRepository.findAllByMenuTypeAndRolesInOrderByCodeAsc(MenuTypeEnum.NavigationMenu,user.getRoles()));
             }
             return new ArrayList<Menu>(){{addAll(menus);}};
         }
@@ -85,9 +85,9 @@ public class UserService {
             }
             if (isAdmin) {
                 //获取单个菜单下的所有按钮菜单
-                menus.addAll(menuRepository.findAllByMenuTypeAndRootMenuIdOrderByCodeAsc(MenuType.ButtonMenu,menuId));
+                menus.addAll(menuRepository.findAllByMenuTypeAndRootMenuIdOrderByCodeAsc(MenuTypeEnum.ButtonMenu,menuId));
             }else {
-                menus.addAll(menuRepository.findAllByMenuTypeAndRootMenuIdAndRolesInOrderByCodeAsc(MenuType.ButtonMenu,menuId,user.getRoles()));
+                menus.addAll(menuRepository.findAllByMenuTypeAndRootMenuIdAndRolesInOrderByCodeAsc(MenuTypeEnum.ButtonMenu,menuId,user.getRoles()));
             }
             return new ArrayList<Menu>(){{addAll(menus);}};
         }

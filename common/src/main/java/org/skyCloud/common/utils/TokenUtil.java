@@ -1,14 +1,7 @@
 package org.skyCloud.common.utils;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
-import io.jsonwebtoken.JwtBuilder;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import org.skyCloud.common.constants.RequestConstant;
+import io.jsonwebtoken.*;
 import org.skyCloud.common.exception.SkyException;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
@@ -80,30 +73,6 @@ public class TokenUtil {
             return String.valueOf(claimsJws.getBody().get(fieldName));
         }
         return null;
-    }
-
-    /**
-     * 直接从request头中获取token 取对应属性值
-     * @param secret 密钥
-     * @param fieldName 属性名称
-     */
-    public static String getFieldValue(String secret,String fieldName) {
-        ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        //获取请求头中的token
-        String jwsToken  = attr.getRequest().getHeader(RequestConstant.TOKEN);
-        if (isValid(jwsToken, secret)) {
-            Jws<Claims> claimsJws = Jwts.parser()
-                    .setSigningKey(DatatypeConverter.parseBase64Binary(secret))
-                    .parseClaimsJws(jwsToken);
-            return String.valueOf(claimsJws.getBody().get(fieldName));
-        }
-        return null;
-    }
-
-    public static String getToken(){
-        ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        //获取请求头中的token
-        return StringUtils.null2EmptyWithTrim(attr.getRequest().getHeader(RequestConstant.TOKEN));
     }
 
     private static boolean isEmpty(String token){

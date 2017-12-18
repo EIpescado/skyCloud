@@ -22,7 +22,7 @@ public class RabbitReceiver {
     // 将处理后的结果以消息形式发送到SYSTEM_SIMPLECONSUMER_OUTPUT通道
     @StreamListener(SystemSink.SYSTEM_SIMPLECONSUMER_INPUT)
     @SendTo(SystemSource.SYSTEM_SIMPLECONSUMER_OUTPUT)
-    public Object receive(Message<Object> message){
+    public Object system_simpleconsumer_input(Message<Object> message){
         JSONObject json = JSON.parseObject(message.getPayload().toString());
         logger.info("接收消息 {},开始加工",json.toJSONString());
         json.put("addNew","新添加");
