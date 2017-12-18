@@ -51,7 +51,7 @@ public class BankOfChinaExchangeRate{
     /**
      * 发布时间
      */
-    private Date pulishTime;
+    private Date publishTime;
 
     public String getCurrency() {
         return currency;
@@ -117,12 +117,12 @@ public class BankOfChinaExchangeRate{
         this.bankConvertRate = bankConvertRate;
     }
 
-    public Date getPulishTime() {
-        return pulishTime;
+    public Date getPublishTime() {
+        return publishTime;
     }
 
-    public void setPulishTime(Date pulishTime) {
-        this.pulishTime = pulishTime;
+    public void setPublishTime(Date pulishTime) {
+        this.publishTime = pulishTime;
     }
 
     public String getFlag() {
@@ -145,7 +145,7 @@ public class BankOfChinaExchangeRate{
                 ", cashSellingRate=" + cashSellingRate +
                 ", safeMiddleRate=" + safeMiddleRate +
                 ", bankConvertRate=" + bankConvertRate +
-                ", pulishTime=" + pulishTime +
+                ", pulishTime=" + publishTime +
                 '}';
     }
 }

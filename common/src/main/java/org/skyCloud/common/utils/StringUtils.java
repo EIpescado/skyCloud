@@ -216,6 +216,44 @@ public class StringUtils {
         return leftPadding(Integer.valueOf(month).toString(),2,"0");
     }
 
+    /**
+     * 格式化字符串
+     * @param template 模版字符 占位使用%s
+     * @param args 参数
+     */
+    public static String format(String template, Object... args) {
+        template = String.valueOf(template);
+        StringBuilder builder = new StringBuilder(template.length() + 16 * args.length);
+        int templateStart = 0;
+
+        int i;
+        int placeholderStart;
+        for(i = 0; i < args.length; templateStart = placeholderStart + 2) {
+            placeholderStart = template.indexOf("%s", templateStart);
+            if(placeholderStart == -1) {
+                break;
+            }
+
+            builder.append(template.substring(templateStart, placeholderStart));
+            builder.append(args[i++]);
+        }
+
+        builder.append(template.substring(templateStart));
+        if(i < args.length) {
+            builder.append(" [");
+            builder.append(args[i++]);
+
+            while(i < args.length) {
+                builder.append(", ");
+                builder.append(args[i++]);
+            }
+
+            builder.append(']');
+        }
+
+        return builder.toString();
+    }
+
     public static void main(String[] args) {
         System.out.println(removeAllSpecialChar("d@ _|\"qwe?%$#251"));
         System.out.println(monthPadding(3));

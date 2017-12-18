@@ -304,7 +304,7 @@ public class DateUtils {
     }
 
     /**
-     * 日期增加小时
+     * 日期增加分钟
      */
     public static Date addMinutes(final Date date, final int amount) {
         return add(date, Calendar.MINUTE, amount);
@@ -504,7 +504,7 @@ public class DateUtils {
     }
 
     /**
-     * 日期对应月份天数
+     * 日期对应年天数
      */
     public static int dayNumOfYear(Date date){
         return getCalendar(date).getActualMaximum(Calendar.DAY_OF_YEAR);

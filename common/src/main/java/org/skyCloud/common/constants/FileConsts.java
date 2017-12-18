@@ -18,7 +18,4 @@ public interface FileConsts {
 
     String DOT = ".";
 
-    // 文件保存路徑
-    String FILE_SAVE_PATH = "D:/fileUpload/files";
-
 }

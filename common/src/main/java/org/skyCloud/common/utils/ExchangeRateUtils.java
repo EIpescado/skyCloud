@@ -136,7 +136,7 @@ public class ExchangeRateUtils {
                 rate.setCashSellingRate(NumberUtils.String2BigDecimal(tr.child(4).html()));//现钞卖出价
                 rate.setSafeMiddleRate(NumberUtils.String2BigDecimal(tr.child(5).html()));//外管局中间价
                 rate.setBankConvertRate(NumberUtils.String2BigDecimal(tr.child(6).html()));//中行折算价
-                rate.setPulishTime(DateUtils.parseRateDate(tr.child(7).html()));//发布时间
+                rate.setPublishTime(DateUtils.parseRateDate(tr.child(7).html()));//发布时间
                 list.add(rate);
             }
         }

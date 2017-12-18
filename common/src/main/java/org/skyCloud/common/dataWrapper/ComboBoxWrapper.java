@@ -1,4 +1,4 @@
-package org.skyCloud.common.utils;
+package org.skyCloud.common.dataWrapper;
 
 import java.io.Serializable;
 

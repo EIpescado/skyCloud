@@ -26,6 +26,10 @@ public class BackResult {
         return code.equals(SUCCESS_CODE);
     }
 
+    public static Boolean succeeded(BackResult backResult){
+        return backResult != null && backResult.succeeded();
+    }
+
     //返回成功
     public  static BackResult successBack(Object res){
         return new BackResult(SUCCESS_CODE,SUCCESS_MESSAGE,res);

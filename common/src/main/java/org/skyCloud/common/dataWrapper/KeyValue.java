@@ -26,4 +26,8 @@ public class KeyValue<K,V> implements Serializable {
     public V getValue() {
         return value;
     }
+
+    public String toString() {
+        return "{"+ key +":"+ value + "}";
+    }
 }

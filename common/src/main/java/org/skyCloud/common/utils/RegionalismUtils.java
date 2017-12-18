@@ -131,7 +131,7 @@ public class RegionalismUtils {
     }
 
     public static void main(String[] args) throws Exception {
-        getLatestRegionalismUrl();
+        getAdministrativeRegion();
     }
 
 }
