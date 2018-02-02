@@ -22,7 +22,7 @@ public class SimpleClientFallbackFactory implements FallbackFactory<SimpleClient
 
     @Override
     public SimpleClient create(Throwable throwable) {
-        logger.error("服务:{} 不可用,原因: {}",discoveryClient.getServices().get(0),throwable.getMessage());
+        logger.error("服务:{} 不可用,原因: {}",discoveryClient.getServices().get(0),throwable);
         return () -> null;
     }
 }

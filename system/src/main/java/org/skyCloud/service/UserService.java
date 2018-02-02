@@ -11,11 +11,10 @@ import org.skyCloud.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import springfox.documentation.schema.Maps;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by yq on 2016/06/23 17:39.
@@ -111,4 +110,51 @@ public class UserService {
         return password ;
     }
 
+    public static void main(String[] args) {
+        List<Menu> menus = new ArrayList<>();
+        List<String> list = new ArrayList<>();
+        for (int x = 0 ; x < 5 ; x ++ ){
+            Menu m = new Menu();
+            m.setName(x + "");
+            menus.add(m);
+            list.add(x + "");
+        }
+        Menu m = new Menu();
+        m.setName("1");
+        menus.add(m);
+        list.add("1");
+//        List<String> x = menus.stream().map(Menu::getName).filter(f -> Integer.parseInt(f) > 3 ).collect(Collectors.toList());
+//        List<String> x = menus.stream().filter(j->!"1".equals(j.getName())).map(Menu::getName).distinct().collect(Collectors.toList());
+//        x.forEach(System.out::println);
+//        Map<String,List<Menu>> map = menus.stream().collect(Collectors.groupingBy(Menu::getName));
+//        Map<String,List<Menu>> map = menus.stream().collect(Collectors.groupingByConcurrent(Menu::getName));
+//        map.entrySet().forEach(entry ->{
+//            System.out.println(entry.getKey() + "___" + entry.getValue().size());
+//        });
+//        list.stream().distinct().collect(Collectors.toList()).forEach(System.out::println);
+
+        List<Map<String,String>> mapList = new ArrayList<>();
+        for (int x = 0 ; x < 5 ; x ++ ){
+            Map<String,String> map = new HashMap<>();
+            map.put("test",x + "");
+            mapList.add(map);
+        }
+        Map<String,String> sks = new HashMap<>();
+        sks.put("test","1");
+        mapList.add(sks);
+        mapList.stream().map(map -> map.get("test")).distinct().collect(Collectors.toList()).forEach(System.out::println);
+
+        String ss = "402880885fc7b779015fd8d266c413a5";
+
+    }
+
+    public static void haha(){
+        hehe();
+    }
+
+    public static void hehe(){
+        System.out.println("test");
+
+        System.out.println("test....");
+    }
 }

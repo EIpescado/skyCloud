@@ -3,7 +3,6 @@ package org.skyCloud.config;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.skyCloud.common.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
@@ -17,10 +16,10 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 
-import java.lang.reflect.Method;
 
 /**
  * redis 配置类
+ * @author yq
  */
 @Configuration
 @EnableCaching
@@ -40,27 +39,27 @@ public class RedisCacheConfig {
         JedisConnectionFactory factory = new JedisConnectionFactory();
         factory.setHostName(host);
         factory.setPort(port);
-        factory.setTimeout(timeout); //设置连接超时时间
+        //设置连接超时时间
+        factory.setTimeout(timeout);
         factory.setPassword(password);
         return factory;
     }
 
     @Bean
     public KeyGenerator defaultKeyGenerator(){
-        return new KeyGenerator() {
-            public Object generate(Object target, Method method, Object... params) {
-                StringBuilder sb = new StringBuilder();
-                sb.append(target.getClass().getName())
-                   .append(method.getName());
-                if (params != null && params.length > 0){
-                    for (Object obj : params) {
-                        sb.append(obj != null ? StringUtils.null2EmptyWithTrim(obj.toString()) : "");
+       return  (target,method,params) -> {
+            StringBuilder sb = new StringBuilder();
+            sb.append(target.getClass().getName())
+               .append(method.getName());
+            if (params != null && params.length > 0){
+                for (Object obj : params) {
+                    if(obj != null){
+                        sb.append(obj.toString());
                     }
                 }
-                return sb.toString();
             }
+            return sb.toString();
         };
-
     }
 
     @Bean  //缓存管理器
@@ -73,7 +72,7 @@ public class RedisCacheConfig {
     public RedisTemplate<String, String> redisTemplate(
             RedisConnectionFactory factory) {
         StringRedisTemplate template = new StringRedisTemplate(factory);
-        Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
+        Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer<>(Object.class);
         ObjectMapper om = new ObjectMapper();
         om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
         om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);

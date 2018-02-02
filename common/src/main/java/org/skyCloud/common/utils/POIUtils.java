@@ -597,7 +597,7 @@ public class POIUtils {
         if(cell == null){
             return  null ;
         }else {
-            if (cell.getCellType() == Cell.CELL_TYPE_NUMERIC){
+            if (cell.getCellType() == Cell.CELL_TYPE_NUMERIC || cell.getCellType() == Cell.CELL_TYPE_FORMULA){
                 return Double.toString(cell.getNumericCellValue());
             }else {
                 return  cell.getStringCellValue();
