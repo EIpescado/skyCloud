@@ -9,7 +9,10 @@ import org.springframework.cloud.netflix.zuul.filters.ZuulProperties;
 import org.springframework.cloud.netflix.zuul.filters.discovery.PatternServiceRouteMapper;
 import org.springframework.context.annotation.Bean;
 
-@EnableZuulProxy //开启Zuul,服务网关  服务路由、均衡负载  权限控制
+/**
+ * 开启Zuul,服务网关  服务路由、均衡负载  权限控制
+ */
+@EnableZuulProxy
 @SpringCloudApplication
 public class ZuulApplication {
 
@@ -17,7 +20,9 @@ public class ZuulApplication {
 		SpringApplication.run(ZuulApplication.class, args);
 	}
 
-	/*自定义服务与路由映射的生成关系 service-v1 生成 /v1/service/ */
+	/**
+	 * 自定义服务与路由映射的生成关系 service-v1 生成 /v1/service/
+	 */
 	@Bean
 	public PatternServiceRouteMapper serviceRouteMapper(){
 		return new PatternServiceRouteMapper(

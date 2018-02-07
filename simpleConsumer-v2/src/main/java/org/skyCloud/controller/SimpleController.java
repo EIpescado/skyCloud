@@ -41,6 +41,7 @@ public class SimpleController {
 
     @GetMapping("listMenu")
     public Object listMenu() {
+        logger.info("v2 的listMenu");
        return simpleClient.list();
     }
 
