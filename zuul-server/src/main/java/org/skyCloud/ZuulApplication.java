@@ -21,7 +21,8 @@ public class ZuulApplication {
 	}
 
 	/**
-	 * 自定义服务与路由映射的生成关系 service-v1 生成 /v1/service/  待验证
+	 * 自定义服务与路由映射的生成关系 service-v1 生成 /v1/service/
+	 * todo  待验证 2018年2月7日 16:16:05
 	 */
 	@Bean
 	public PatternServiceRouteMapper serviceRouteMapper(){
