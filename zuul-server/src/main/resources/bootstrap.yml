@@ -18,6 +18,12 @@ spring:
   profiles:
     active: zuul1
 
+zuul:
+  routes:
+      simpleConsumer-v2:
+           path: /api/simpleConsumer-v2/**
+           serviceId: simpleConsumer-v2
+
 #多实例配置
 ---
 spring:
