@@ -23,13 +23,3 @@ spring:
   profiles: system2
 server:
   port: 3402
-
-
----
-  #消息总线 mq
-spring:
-  rabbitmq:
-    host: localhost
-    port: 5672
-    username: yq
-    password: 123456
