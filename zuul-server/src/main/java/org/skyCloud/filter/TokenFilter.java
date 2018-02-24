@@ -16,7 +16,6 @@ import org.springframework.util.PathMatcher;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,14 +25,22 @@ import java.util.List;
 @Component
 public class TokenFilter extends ZuulFilter {
 
+    @Autowired
+    private RedisTemplate<String, String> redisTemplate;
 
-//    private final String tokenSecret="UnRAbmV3dG9rZW4xMjM=";
+    /**
+     * token秘钥
+     */
+    @Value("${token.secret}")
+    private String tokenSecret;
 
     private final PathMatcher pathMatcher = new AntPathMatcher();
 
     private static final Logger logger = LoggerFactory.getLogger(TokenFilter.class);
 
-    //不拦截的请求链接
+    /**
+     * 不拦截的请求链接
+     */
     private static List<String> noInterceptorList = new ArrayList<String>() {
         {
             add("/api/system/user/login");
@@ -43,12 +50,11 @@ public class TokenFilter extends ZuulFilter {
 
     private static final String FAIL_CODE = "10086";
     private static final String FAIL_MSG = "登录已失效";
+    /**登录失效返回json*/
+    private static final String FAIL_RESPONSE_JSON =  new JSONObject()
+                                                         .fluentPut("code", FAIL_CODE)
+                                                         .fluentPut("msg", FAIL_MSG).toJSONString();
 
-    @Autowired
-    private RedisTemplate<String, String> redisTemplate;
-
-    @Value("${token.secret}")
-    private String tokenSecret;  //token秘钥
 
     /**
      * 过滤器类型
@@ -71,7 +77,7 @@ public class TokenFilter extends ZuulFilter {
     }
 
     /**
-     * 指定过滤器的有效范围
+     * 指定过滤器的有效范围 判断该过滤器是否要执行
      */
     @Override
     public boolean shouldFilter() {
@@ -135,12 +141,10 @@ public class TokenFilter extends ZuulFilter {
             HttpServletResponse response = ctx.getResponse();
             response.setCharacterEncoding("UTF-8");
             response.setContentType("application/json; charset=utf-8");
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("code", FAIL_CODE);
-            jsonObject.put("msg", FAIL_MSG);
-            ctx.setSendZuulResponse(false);//过滤该请求 不对其进行路由
+            /**过滤该请求 不对其进行路由*/
+            ctx.setSendZuulResponse(false);
             ctx.setResponseStatusCode(HttpServletResponse.SC_UNAUTHORIZED);
-            ctx.setResponseBody(jsonObject.toJSONString());
+            ctx.setResponseBody(FAIL_RESPONSE_JSON);
             ctx.setResponse(response);
         } catch (Exception e) {
             e.printStackTrace();

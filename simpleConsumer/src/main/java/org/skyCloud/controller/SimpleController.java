@@ -6,6 +6,7 @@ import org.skyCloud.stream.SimpleSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,6 +31,8 @@ public class SimpleController {
     private DiscoveryClient discoveryClient;
     @Autowired
     private SimpleSource simpleSource;
+    @Value("${bus.test}")
+    private String bus;
 
     @GetMapping("processMessage")
     public void processEvent() {
@@ -46,6 +49,7 @@ public class SimpleController {
 
     @GetMapping("serviceInfo")
     public Object serviceInfo(@RequestParam String serviceName){
+        System.out.println(bus);
       return   discoveryClient.getInstances(serviceName);
     }
 
