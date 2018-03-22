@@ -2,6 +2,7 @@ package org.skyCloud.controller;
 
 import org.skyCloud.client.SimpleClient;
 import org.skyCloud.common.dataWrapper.BackResult;
+import org.skyCloud.service.SimpleService;
 import org.skyCloud.stream.SimpleSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,6 +35,8 @@ public class SimpleController {
     private SimpleSource simpleSource;
     @Value("${bus.test}")
     private String bus;
+    @Autowired
+    private SimpleService simpleService;
 
     @GetMapping("processMessage")
     public void processEvent() {
@@ -51,6 +54,18 @@ public class SimpleController {
     @GetMapping("serviceInfo")
     public Object serviceInfo(@RequestParam String serviceName){
       return   discoveryClient.getInstances(serviceName);
+    }
+
+    @GetMapping("test")
+    public Object test(){
+        simpleService.test();
+        return null ;
+    }
+
+    @GetMapping("test2")
+    public Object test2(){
+        simpleService.test2();
+        return null ;
     }
 
 }

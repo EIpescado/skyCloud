@@ -61,6 +61,21 @@ public class UserController extends BaseController{
         return new BackResult();
     }
 
+    @ApiOperation(value = "用户注册")
+    @PostMapping(value = "/register2")
+    public BackResult register2() throws UserException {
+        UserRegister user = new UserRegister();
+        user.setEmail("3069@qq.com");
+        user.setPhone("1265161");
+        user.setPassword("1616161");
+        user.setUserName("test9527");
+        String password = user.getPassword() ;
+        password = userService.encryptPassword(password);
+        user.setPassword(password);
+        userService.register2(user.toUser());
+        return new BackResult();
+    }
+
     @ApiOperation(value = "登录 返回token等业务信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "email", value = "帐号", required = true, dataType = "String"),

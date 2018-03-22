@@ -1,5 +1,6 @@
 package org.skyCloud.service;
 
+import com.codingapi.tx.annotation.TxTransaction;
 import org.skyCloud.common.utils.CodeUtils;
 import org.skyCloud.entity.Menu;
 import org.skyCloud.entity.MenuTypeEnum;
@@ -27,10 +28,26 @@ public class UserService {
     private MenuRepository menuRepository;
 
     @Transactional
+    @TxTransaction
     public void register(User user){
        if(userRepository.countByUserName(user.getUserName()) > 0){
            throw new UserException(UserException.ErrorEnum.USER_NAME_REPEAT);
        }
+        if(userRepository.countByEmail(user.getEmail()) > 0){
+            throw new UserException(UserException.ErrorEnum.EMAIL_REPEAT);
+        }
+        if(userRepository.countByPhone(user.getPhone()) > 0){
+            throw new UserException(UserException.ErrorEnum.PHONE_REPEAT);
+        }
+        userRepository.save(user);
+    }
+
+    @Transactional
+    @TxTransaction
+    public void register2(User user){
+        if(userRepository.countByUserName(user.getUserName()) > 0){
+            throw new UserException(UserException.ErrorEnum.USER_NAME_REPEAT);
+        }
         if(userRepository.countByEmail(user.getEmail()) > 0){
             throw new UserException(UserException.ErrorEnum.EMAIL_REPEAT);
         }

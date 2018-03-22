@@ -22,6 +22,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
+		<lcn.last.version>4.1.0</lcn.last.version>
+		<mysql.version>5.1.39</mysql.version>
 	</properties>
 
 	<dependencies>
@@ -94,10 +96,52 @@
 			<artifactId>spring-cloud-starter-bus-amqp</artifactId>
 		</dependency>
 
+		<!--mysql-->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql.version}</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.skyCloud</groupId>
 			<artifactId>common</artifactId>
 			<version>1.0</version>
+		</dependency>
+
+		<!--分布式事务 LCN-->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>1.0.24</version>
+		</dependency>
+		<dependency>
+			<groupId>com.codingapi</groupId>
+			<artifactId>transaction-springcloud</artifactId>
+			<version>${lcn.last.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.codingapi</groupId>
+			<artifactId>tx-plugins-db</artifactId>
+			<version>${lcn.last.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<!--自动获得tomcat-jdbc依赖 hibernate spring-data-jpa-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 
 	</dependencies>

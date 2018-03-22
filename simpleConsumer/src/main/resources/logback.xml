@@ -20,6 +20,7 @@
 
     <!-- DEBUG -->
     <appender name="DEBUG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/logs/debug.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- 按天回滚 daily -->
             <fileNamePattern>${LOG_PATH}/logs/debug-%d{yyyy-MM-dd}-%i.log</fileNamePattern>
@@ -41,6 +42,7 @@
 
     <!-- 出错日志 appender  -->
     <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/logs/error.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- 按天回滚 daily -->
             <fileNamePattern>${LOG_PATH}/logs/error-%d{yyyy-MM-dd}-%i.log</fileNamePattern>
@@ -78,6 +80,7 @@
 
     <!-- INFO -->
     <appender name="INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/logs/info.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- 按天回滚 daily -->
             <fileNamePattern>${LOG_PATH}/logs/info-%d{yyyy-MM-dd}-%i.log</fileNamePattern>
