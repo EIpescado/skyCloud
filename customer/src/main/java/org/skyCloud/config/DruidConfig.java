@@ -36,7 +36,7 @@ public class DruidConfig {
     @Value("${druid.deny}")
     private String deny;
 
-    @Bean
+    @Bean(destroyMethod = "close", initMethod = "init")
     @ConfigurationProperties(prefix = "spring.datasource")
     public DataSource dataSource(){
         return new DruidDataSource();
