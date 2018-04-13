@@ -1,0 +1,42 @@
+#--config的相关配置会先于application.properties，
+#bootstrap.properties的加载也是先于application.properties
+spring:
+  cloud:
+    config:
+        #配置文件名称前缀 启用中心配置 #读取文件前缀
+        name: common-config
+        profile: ${config.profile:dev}
+#        uri: http://localhost:2004
+        #使用服务发现组件中的config server,而非指定uri
+        discovery:
+          #开启通过服务发现组件访问config server
+          enabled: true
+          #指定config server在服务发现组件的serviceId,默认configserver
+          service-id: config-server
+        #config-server 开启http basic认证,关闭了config-server的匿名访问
+        #连接需要认证的config-server  未找到通用配置方式 暂不开启
+#        username: yq
+#        password: 123456
+  application:
+    name: system
+  profiles:
+    active: system1
+
+#使用服务发现组件中的config server 需要配置
+eureka:
+  client:
+    service-url:
+      defaultZone : http://eureka1:2000/eureka/,http://eureka2:2002/eureka/
+
+
+---
+spring:
+  profiles: system1
+server:
+  port: 3401
+
+---
+spring:
+  profiles: system2
+server:
+  port: 3402
